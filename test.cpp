@@ -1034,6 +1034,7 @@ int main() {
 Practical:18 
 Implement queue data structure and its operations using arrays.
 */
+/*
 #include <iostream>
 #define MAX 5  // Define maximum size of the queue
 using namespace std;
@@ -1130,3 +1131,4 @@ int main() {
 
     return 0;
 }
+*/
