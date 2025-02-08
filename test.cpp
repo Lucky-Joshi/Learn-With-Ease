@@ -931,3 +931,202 @@ int main() {
     return 0;
 }
 */
+/*
+Practical:17
+ Implement stack data structure and its operations using linked Lists.
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+class Stack {
+private:
+    Node* top; // Pointer to the top of the stack
+
+public:
+    Stack() { top = nullptr; } // Constructor initializes top as NULL
+
+    // Push operation
+    void push(int val) {
+        Node* newNode = new Node(val);
+        newNode->next = top; // New node points to the previous top
+        top = newNode; // New node becomes the top
+        cout << val << " pushed into stack." << endl;
+    }
+
+    // Pop operation
+    void pop() {
+        if (!top) {
+            cout << "Stack Underflow! No element to pop." << endl;
+            return;
+        }
+        Node* temp = top;
+        cout << top->data << " popped from stack." << endl;
+        top = top->next; // Move top to the next node
+        delete temp;
+    }
+
+    // Peek operation (Get top element)
+    int peek() {
+        if (!top) {
+            cout << "Stack is empty." << endl;
+            return -1;
+        }
+        return top->data;
+    }
+
+    // Check if stack is empty
+    bool isEmpty() {
+        return top == nullptr;
+    }
+
+    // Display the stack
+    void display() {
+        if (isEmpty()) {
+            cout << "Stack is empty." << endl;
+            return;
+        }
+        cout << "Stack elements: ";
+        Node* temp = top;
+        while (temp) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    Stack s;
+
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    s.push(40);
+    s.push(50);
+
+    s.display();
+
+    cout << "Top element is: " << s.peek() << endl;
+
+    s.pop();
+    s.pop();
+    
+    s.display();
+
+    cout << "Is stack empty? " << (s.isEmpty() ? "Yes" : "No") << endl;
+
+    return 0;
+}
+*/
+/*
+Practical:18 
+Implement queue data structure and its operations using arrays.
+*/
+#include <iostream>
+#define MAX 5  // Define maximum size of the queue
+using namespace std;
+
+class Queue {
+private:
+    int front, rear;
+    int arr[MAX];
+
+public:
+    Queue() {
+        front = -1;
+        rear = -1;
+    }
+
+    // Enqueue operation (Insert element into the queue)
+    void enqueue(int val) {
+        if (rear == MAX - 1) {
+            cout << "Queue Overflow! Cannot insert " << val << endl;
+            return;
+        }
+        if (front == -1) front = 0; // Set front if it's the first element
+        arr[++rear] = val;
+        cout << val << " enqueued into queue." << endl;
+    }
+
+    // Dequeue operation (Remove element from the queue)
+    void dequeue() {
+        if (front == -1 || front > rear) {
+            cout << "Queue Underflow! No element to dequeue." << endl;
+            front = rear = -1; // Reset queue when empty
+            return;
+        }
+        cout << arr[front++] << " dequeued from queue." << endl;
+    }
+
+    // Get front element
+    int getFront() {
+        if (front == -1 || front > rear) {
+            cout << "Queue is empty." << endl;
+            return -1;
+        }
+        return arr[front];
+    }
+
+    // Get rear element
+    int getRear() {
+        if (rear == -1) {
+            cout << "Queue is empty." << endl;
+            return -1;
+        }
+        return arr[rear];
+    }
+
+    // Check if queue is empty
+    bool isEmpty() {
+        return (front == -1 || front > rear);
+    }
+
+    // Display the queue
+    void display() {
+        if (isEmpty()) {
+            cout << "Queue is empty." << endl;
+            return;
+        }
+        cout << "Queue elements: ";
+        for (int i = front; i <= rear; i++)
+            cout << arr[i] << " ";
+        cout << endl;
+    }
+};
+
+int main() {
+    Queue q;
+
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+    q.enqueue(50);
+    q.enqueue(60); // This will show queue overflow
+
+    q.display();
+
+    cout << "Front element is: " << q.getFront() << endl;
+    cout << "Rear element is: " << q.getRear() << endl;
+
+    q.dequeue();
+    q.dequeue();
+
+    q.display();
+
+    cout << "Is queue empty? " << (q.isEmpty() ? "Yes" : "No") << endl;
+
+    return 0;
+}
