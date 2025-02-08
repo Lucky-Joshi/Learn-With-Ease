@@ -763,6 +763,7 @@ int main() {
 Practical: 15
 WAP to count number of nodes in a circular linked list.
 */
+/*
 #include <iostream>
 using namespace std;
 
@@ -849,3 +850,4 @@ int main() {
 
     return 0;
 }
+*/
