@@ -916,25 +916,18 @@ public:
 
 int main() {
     Stack s;
-
     s.push(10);
     s.push(20);
     s.push(30);
     s.push(40);
     s.push(50);
     s.push(60);  // This will show stack overflow
-
     s.display();
-
     cout << "Top element is: " << s.peek() << endl;
-
     s.pop();
-    s.pop();
-    
+    s.pop(); 
     s.display();
-
     cout << "Is stack empty? " << (s.isEmpty() ? "Yes" : "No") << endl;
-
     return 0;
 }
 */
