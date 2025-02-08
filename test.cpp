@@ -1132,3 +1132,121 @@ int main() {
     return 0;
 }
 */
+/*
+Practical:19 
+Implement queue data structure and its operations using Linked Lists.
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+class Queue {
+private:
+    Node *front, *rear; // Front and rear pointers
+
+public:
+    Queue() {
+        front = rear = nullptr;
+    }
+
+    // Enqueue operation (Insert element into the queue)
+    void enqueue(int val) {
+        Node* newNode = new Node(val);
+        if (!rear) { // If queue is empty
+            front = rear = newNode;
+        } else {
+            rear->next = newNode;
+            rear = newNode;
+        }
+        cout << val << " enqueued into queue." << endl;
+    }
+
+    // Dequeue operation (Remove element from the queue)
+    void dequeue() {
+        if (!front) {
+            cout << "Queue Underflow! No element to dequeue." << endl;
+            return;
+        }
+        Node* temp = front;
+        front = front->next;
+
+        if (!front) rear = nullptr; // If queue becomes empty, reset rear
+
+        cout << temp->data << " dequeued from queue." << endl;
+        delete temp;
+    }
+
+    // Get front element
+    int getFront() {
+        if (!front) {
+            cout << "Queue is empty." << endl;
+            return -1;
+        }
+        return front->data;
+    }
+
+    // Get rear element
+    int getRear() {
+        if (!rear) {
+            cout << "Queue is empty." << endl;
+            return -1;
+        }
+        return rear->data;
+    }
+
+    // Check if queue is empty
+    bool isEmpty() {
+        return front == nullptr;
+    }
+
+    // Display the queue
+    void display() {
+        if (isEmpty()) {
+            cout << "Queue is empty." << endl;
+            return;
+        }
+        cout << "Queue elements: ";
+        Node* temp = front;
+        while (temp) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    Queue q;
+
+    q.enqueue(10);
+    q.enqueue(20);
+    q.enqueue(30);
+    q.enqueue(40);
+    q.enqueue(50);
+
+    q.display();
+
+    cout << "Front element is: " << q.getFront() << endl;
+    cout << "Rear element is: " << q.getRear() << endl;
+
+    q.dequeue();
+    q.dequeue();
+
+    q.display();
+
+    cout << "Is queue empty? " << (q.isEmpty() ? "Yes" : "No") << endl;
+
+    return 0;
+}
+*/
