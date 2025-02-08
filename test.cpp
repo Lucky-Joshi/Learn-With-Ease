@@ -851,3 +851,90 @@ int main() {
     return 0;
 }
 */
+/*
+Practical: 16
+Implement stack data structure and its operations using arrays.
+*/
+/*
+#include <iostream>
+#define MAX 5  // Define maximum size of the stack
+using namespace std;
+
+class Stack {
+private:
+    int top; 
+    int arr[MAX]; // Array to store stack elements
+
+public:
+    Stack() { top = -1; } // Constructor initializes top
+
+    // Push operation
+    void push(int val) {
+        if (top >= MAX - 1) {
+            cout << "Stack Overflow! Cannot push " << val << endl;
+            return;
+        }
+        arr[++top] = val;
+        cout << val << " pushed into stack." << endl;
+    }
+
+    // Pop operation
+    void pop() {
+        if (top < 0) {
+            cout << "Stack Underflow! No element to pop." << endl;
+            return;
+        }
+        cout << arr[top--] << " popped from stack." << endl;
+    }
+
+    // Peek operation (Get top element)
+    int peek() {
+        if (top < 0) {
+            cout << "Stack is empty." << endl;
+            return -1;
+        }
+        return arr[top];
+    }
+
+    // Check if stack is empty
+    bool isEmpty() {
+        return top < 0;
+    }
+
+    // Display the stack
+    void display() {
+        if (isEmpty()) {
+            cout << "Stack is empty." << endl;
+            return;
+        }
+        cout << "Stack elements: ";
+        for (int i = top; i >= 0; i--)
+            cout << arr[i] << " ";
+        cout << endl;
+    }
+};
+
+int main() {
+    Stack s;
+
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    s.push(40);
+    s.push(50);
+    s.push(60);  // This will show stack overflow
+
+    s.display();
+
+    cout << "Top element is: " << s.peek() << endl;
+
+    s.pop();
+    s.pop();
+    
+    s.display();
+
+    cout << "Is stack empty? " << (s.isEmpty() ? "Yes" : "No") << endl;
+
+    return 0;
+}
+*/
