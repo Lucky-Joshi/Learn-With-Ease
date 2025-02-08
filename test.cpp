@@ -182,3 +182,392 @@ int main() {
     return 0;
 }
 */
+/*
+Practical:8 
+Check Whether the Length of a Given Linked List is Even or Odd
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+class LinkedList {
+public:
+    Node* head;
+
+    LinkedList() {
+        head = nullptr;
+    }
+
+    void insert(int val) {
+        Node* newNode = new Node(val);
+        if (!head) {
+            head = newNode;
+        } else {
+            Node* temp = head;
+            while (temp->next) {
+                temp = temp->next;
+            }
+            temp->next = newNode;
+        }
+    }
+
+    void checkEvenOrOdd() {
+        Node* temp = head;
+        int count = 0;
+
+        while (temp) {
+            count++;
+            temp = temp->next;
+        }
+
+        if (count % 2 == 0)
+            cout << "The length of the linked list is Even.\n";
+        else
+            cout << "The length of the linked list is Odd.\n";
+    }
+};
+
+int main() {
+    LinkedList list;
+    list.insert(10);
+    list.insert(20);
+    list.insert(30);
+    list.insert(40);
+
+    list.checkEvenOrOdd(); // Output: Even
+
+    list.insert(50);
+    list.checkEvenOrOdd(); // Output: Odd
+
+    return 0;
+}
+*/
+/*Practical:9
+Search an Element in a Linked List and Return its Position
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+class LinkedList {
+public:
+    Node* head;
+
+    LinkedList() {
+        head = nullptr;
+    }
+
+    void insert(int val) {
+        Node* newNode = new Node(val);
+        if (!head) {
+            head = newNode;
+        } else {
+            Node* temp = head;
+            while (temp->next) {
+                temp = temp->next;
+            }
+            temp->next = newNode;
+        }
+    }
+
+    int search(int key) {
+        Node* temp = head;
+        int position = 1; // Start position from 1
+
+        while (temp) {
+            if (temp->data == key)
+                return position;
+            temp = temp->next;
+            position++;
+        }
+        return -1; // Not found
+    }
+};
+
+int main() {
+    LinkedList list;
+    list.insert(10);
+    list.insert(20);
+    list.insert(30);
+    list.insert(40);
+
+    int key = 30;
+    int position = list.search(key);
+
+    if (position != -1)
+        cout << "Element " << key << " found at position: " << position << endl;
+    else
+        cout << "Element " << key << " not found in the linked list.\n";
+
+    return 0;
+}
+*/
+/*
+Practical:10
+WAP to count number of nodes in a given linked list.
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+class LinkedList {
+public:
+    Node* head;
+
+    LinkedList() {
+        head = nullptr;
+    }
+
+    void insert(int val) {
+        Node* newNode = new Node(val);
+        if (!head) {
+            head = newNode;
+        } else {
+            Node* temp = head;
+            while (temp->next) {
+                temp = temp->next;
+            }
+            temp->next = newNode;
+        }
+    }
+
+    int countNodes() {
+        int count = 0;
+        Node* temp = head;
+        while (temp) {
+            count++;
+            temp = temp->next;
+        }
+        return count;
+    }
+};
+
+int main() {
+    LinkedList list;
+    list.insert(10);
+    list.insert(20);
+    list.insert(30);
+    list.insert(40);
+
+    cout << "Number of nodes in the linked list: " << list.countNodes() << endl;
+
+    return 0;
+}
+*/
+/*
+Practical:11
+WAP to insert elements 2, 20, 4, and 5 in order in a singly linked list from front and then print the numbers.
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+class LinkedList {
+public:
+    Node* head;
+
+    LinkedList() {
+        head = nullptr;
+    }
+
+    void insertFront(int val) {
+        Node* newNode = new Node(val);
+        newNode->next = head;
+        head = newNode;
+    }
+
+    void printList() {
+        Node* temp = head;
+        while (temp) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    LinkedList list;
+
+    // Inserting elements from the front
+    list.insertFront(5);
+    list.insertFront(4);
+    list.insertFront(20);
+    list.insertFront(2);
+
+    // Printing the linked list
+    cout << "Linked List elements: ";
+    list.printList();
+
+    return 0;
+}
+*/
+/*
+Practical:12
+WAP implementing doubly linked list.
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* prev;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        prev = nullptr;
+        next = nullptr;
+    }
+};
+
+class DoublyLinkedList {
+public:
+    Node* head;
+
+    DoublyLinkedList() {
+        head = nullptr;
+    }
+
+    // Insert at the front
+    void insertFront(int val) {
+        Node* newNode = new Node(val);
+        if (!head) {
+            head = newNode;
+            return;
+        }
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;
+    }
+
+    // Insert at the end
+    void insertEnd(int val) {
+        Node* newNode = new Node(val);
+        if (!head) {
+            head = newNode;
+            return;
+        }
+        Node* temp = head;
+        while (temp->next) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->prev = temp;
+    }
+
+    // Delete a node
+    void deleteNode(int val) {
+        if (!head) return;
+
+        Node* temp = head;
+
+        // If head node needs to be deleted
+        if (head->data == val) {
+            head = head->next;
+            if (head) head->prev = nullptr;
+            delete temp;
+            return;
+        }
+
+        while (temp && temp->data != val) {
+            temp = temp->next;
+        }
+
+        if (!temp) return; // Element not found
+
+        if (temp->next) temp->next->prev = temp->prev;
+        if (temp->prev) temp->prev->next = temp->next;
+
+        delete temp;
+    }
+
+    // Count nodes in the doubly linked list
+    int countNodes() {
+        int count = 0;
+        Node* temp = head;
+        while (temp) {
+            count++;
+            temp = temp->next;
+        }
+        return count;
+    }
+
+    // Display the linked list
+    void display() {
+        Node* temp = head;
+        while (temp) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    DoublyLinkedList dll;
+
+    dll.insertEnd(10);
+    dll.insertEnd(20);
+    dll.insertEnd(30);
+    dll.insertFront(5);
+    dll.insertFront(2);
+
+    cout << "Doubly Linked List: ";
+    dll.display();
+
+    cout << "Number of nodes: " << dll.countNodes() << endl;
+
+    dll.deleteNode(20);
+    cout << "After deleting 20: ";
+    dll.display();
+
+    return 0;
+}
+*/
