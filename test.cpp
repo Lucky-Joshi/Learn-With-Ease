@@ -759,3 +759,93 @@ int main() {
     return 0;
 }
 */
+/*
+Practical: 15
+WAP to count number of nodes in a circular linked list.
+*/
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+class CircularLinkedList {
+public:
+    Node* head;
+
+    CircularLinkedList() {
+        head = nullptr;
+    }
+
+    // Insert at the end
+    void insertEnd(int val) {
+        Node* newNode = new Node(val);
+
+        if (!head) { // If the list is empty
+            head = newNode;
+            newNode->next = head;
+            return;
+        }
+
+        Node* temp = head;
+        while (temp->next != head) { // Traverse to the last node
+            temp = temp->next;
+        }
+
+        temp->next = newNode;
+        newNode->next = head;
+    }
+
+    // Count nodes in Circular Linked List
+    int countNodes() {
+        if (!head) return 0; // Empty list
+
+        int count = 0;
+        Node* temp = head;
+        do {
+            count++;
+            temp = temp->next;
+        } while (temp != head);
+
+        return count;
+    }
+
+    // Display the list
+    void display() {
+        if (!head) {
+            cout << "List is empty" << endl;
+            return;
+        }
+
+        Node* temp = head;
+        do {
+            cout << temp->data << " ";
+            temp = temp->next;
+        } while (temp != head);
+        cout << endl;
+    }
+};
+
+int main() {
+    CircularLinkedList cll;
+
+    cll.insertEnd(10);
+    cll.insertEnd(20);
+    cll.insertEnd(30);
+    cll.insertEnd(40);
+
+    cout << "Circular Linked List: ";
+    cll.display();
+
+    cout << "Number of nodes: " << cll.countNodes() << endl;
+
+    return 0;
+}
