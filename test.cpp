@@ -571,3 +571,190 @@ int main() {
     return 0;
 }
 */
+/*
+Practical:13
+WAP to insert an element (new node) in a doubly linked list at the end.
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* prev;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        prev = nullptr;
+        next = nullptr;
+    }
+};
+
+class DoublyLinkedList {
+public:
+    Node* head;
+
+    DoublyLinkedList() {
+        head = nullptr;
+    }
+
+    // Function to insert a node at the end
+    void insertEnd(int val) {
+        Node* newNode = new Node(val);
+
+        if (!head) { // If the list is empty
+            head = newNode;
+            return;
+        }
+
+        Node* temp = head;
+        while (temp->next) { // Traverse to the last node
+            temp = temp->next;
+        }
+
+        temp->next = newNode;
+        newNode->prev = temp;
+    }
+
+    // Function to display the list
+    void display() {
+        Node* temp = head;
+        while (temp) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    DoublyLinkedList dll;
+
+    // Inserting elements at the end
+    dll.insertEnd(10);
+    dll.insertEnd(20);
+    dll.insertEnd(30);
+    dll.insertEnd(40);
+
+    // Displaying the linked list
+    cout << "Doubly Linked List: ";
+    dll.display();
+
+    return 0;
+}
+*/
+/*
+Practical: 14
+WAP implementing circular linked list.
+*/
+/*
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+class CircularLinkedList {
+public:
+    Node* head;
+
+    CircularLinkedList() {
+        head = nullptr;
+    }
+
+    // Insert at the end
+    void insertEnd(int val) {
+        Node* newNode = new Node(val);
+
+        if (!head) { // If the list is empty
+            head = newNode;
+            newNode->next = head;
+            return;
+        }
+
+        Node* temp = head;
+        while (temp->next != head) { // Traverse to the last node
+            temp = temp->next;
+        }
+
+        temp->next = newNode;
+        newNode->next = head;
+    }
+
+    // Delete a node
+    void deleteNode(int val) {
+        if (!head) return;
+
+        Node* temp = head, *prev = nullptr;
+
+        // If head needs to be deleted
+        if (head->data == val) {
+            while (temp->next != head) { // Traverse to last node
+                temp = temp->next;
+            }
+            if (head == head->next) { // Only one node in list
+                delete head;
+                head = nullptr;
+                return;
+            }
+            temp->next = head->next;
+            delete head;
+            head = temp->next;
+            return;
+        }
+
+        // Traverse the list
+        do {
+            prev = temp;
+            temp = temp->next;
+        } while (temp != head && temp->data != val);
+
+        if (temp == head) return; // Not found
+
+        prev->next = temp->next;
+        delete temp;
+    }
+
+    // Display the list
+    void display() {
+        if (!head) {
+            cout << "List is empty" << endl;
+            return;
+        }
+
+        Node* temp = head;
+        do {
+            cout << temp->data << " ";
+            temp = temp->next;
+        } while (temp != head);
+        cout << endl;
+    }
+};
+
+int main() {
+    CircularLinkedList cll;
+
+    cll.insertEnd(10);
+    cll.insertEnd(20);
+    cll.insertEnd(30);
+    cll.insertEnd(40);
+
+    cout << "Circular Linked List: ";
+    cll.display();
+
+    cll.deleteNode(20);
+    cout << "After deleting 20: ";
+    cll.display();
+
+    return 0;
+}
